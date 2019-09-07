@@ -90,7 +90,10 @@ for root, dirs, files in os.walk('./Yaml-Data'):
                     name_pattern = re.compile("^(\D+)(\d+)$")
                     print(name_pattern.match(acl_name))
                     #print(acl(acl_data))
-                    acl(acl_data)
+                    if name_pattern.match(acl_name) != None:
+                        acl(acl_data)
+                    else:
+                        print("----> {0} ACL Name has Error and return None".format(acl_name))
                 except MultipleInvalid as err:
                     for each in err.errors:
                         invalid_value = ""
