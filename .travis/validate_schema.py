@@ -84,6 +84,14 @@ for root, dirs, files in os.walk('./Yaml-Data'):
 
             duplicate_check = []
             for acl_name, acl_data in yaml_content["ACL"].items():
+                #print("----> ACL Name is {0}".format(acl_name))
+                name_pattern = re.compile("^(\D+)(\d+)$")
+                if name_pattern.match(acl_name) != None:
+                    print("ACL Name is {0}".format(acl_name))
+                    pass
+                else:
+                    print("----> {0} ACL Name Return None".format(acl_name))
+                    ret += 1
                 # checking schema
                 try:
                     acl(acl_data)
@@ -150,6 +158,8 @@ for root, dirs, files in os.walk('./Yaml-Data'):
                 content = yaml_content.get("ACL", {})
 
                 if content == {}:
+                    print("HIII")
+                    print(content)
                     pass
                 else:
                     requests.packages.urllib3.disable_warnings()
