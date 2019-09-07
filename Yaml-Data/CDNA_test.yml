@@ -70,23 +70,22 @@ EBO:
         - EBO_CDNA
       Tags:
       - Java Download
-    IA_acl11:
-      Comments: EBY Livestore Access for monitor.edgecast.com
+    CDNA_acl5:
+      Comments: EBO to Ruby
       Destination:
-        DestinationEnvironment: IR500
-        DestinationHostname:
+        DestinationEnvironment: EC
+        DestinationHostname: rubygems.org
         DestinationNetworkGroup:
         DestinationPOP:
         -
-        DestinationPOPGroup: Back Office
+        DestinationPOPGroup: Internet
         DestinationPort:
         - 443
-        - 80
         DestinationProtocol:
         - TCP
         DestinationPurpose:
         DestinationSubPurpose:
-        DestinationVIP: 6707
+        DestinationVIP:
         DestinationVLAN:
         -
       Source:
@@ -97,15 +96,2058 @@ EBO:
         - EBO
         SourcePOPGroup: Back Office
         SourcePort:
+        -
+        SourcePurpose:
+        SourceSubPurpose:
+        SourceVIP:
+        SourceVLAN:
+        - EBO_CDNA_SLW
+      Tags:
+      - Ruby Gems
+    CDNA_acl6:
+      Comments: EBO to Ruby
+      Destination:
+        DestinationEnvironment: EC
+        DestinationHostname: api.rubygems.org
+        DestinationNetworkGroup:
+        DestinationPOP:
+        -
+        DestinationPOPGroup: Internet
+        DestinationPort:
         - 443
+        DestinationProtocol:
+        - TCP
+        DestinationPurpose:
+        DestinationSubPurpose:
+        DestinationVIP:
+        DestinationVLAN:
+        -
+      Source:
+        SourceEnvironment: EC
+        SourceHostname:
+        SourceNetworkGroup:
+        SourcePOP:
+        - EBO
+        SourcePOPGroup: Back Office
+        SourcePort:
+        -
+        SourcePurpose:
+        SourceSubPurpose:
+        SourceVIP:
+        SourceVLAN:
+        - EBO_CDNA_SLW
+      Tags:
+      - Ruby Gems
+#    CDNA_acl7:
+#      Comments: dbo -> rtstats
+#      Destination:
+#        DestinationEnvironment: EC
+#        DestinationHostname:
+#        DestinationNetworkGroup:
+#        DestinationPOP:
+#        - EBO
+#        DestinationPOPGroup: Back Office
+#        DestinationPort:
+#        - 80
+#        - 10000
+#        - 10001
+#        - 9995-9999
+#        DestinationProtocol:
+#        - TCP
+#        DestinationPurpose: RTStats Server
+#        DestinationSubPurpose: All
+#        DestinationVIP:
+#        DestinationVLAN:
+#        -
+#      Source:
+#        SourceEnvironment: EC
+#        SourceHostname:
+#        SourceNetworkGroup:
+#        SourcePOP:
+#        - EBO
+#        SourcePOPGroup: Back Office
+#        SourcePort:
+#        -
+#        SourcePurpose: Director Back Office
+#        SourceSubPurpose: All
+#        SourceVIP:
+#        SourceVLAN:
+#        -
+#      Tags:
+#      - rtstats
+    CDNA_acl8:
+      Comments: EBO -> cache rtstats query VIP
+      Destination:
+        DestinationEnvironment: EC
+        DestinationHostname:
+        DestinationNetworkGroup:
+        DestinationPOP:
+        - EBO
+        DestinationPOPGroup: Back Office
+        DestinationPort:
         - 80
-        SourcePurpose: Monitor Server
-        SourceSubPurpose: ecnweb
+        - 9995-9999
+        DestinationProtocol:
+        - TCP
+        DestinationPurpose:
+        DestinationSubPurpose:
+        DestinationVIP: 55242
+        DestinationVLAN:
+        -
+      Source:
+        SourceEnvironment: EC
+        SourceHostname:
+        SourceNetworkGroup:
+        SourcePOP:
+        - EBO
+        SourcePOPGroup: Back Office
+        SourcePort:
+        -
+        SourcePurpose: All
+        SourceSubPurpose: All
         SourceVIP:
         SourceVLAN:
         -
       Tags:
-      - ecnweb
-      - monitor
-      - dashboard
+      - rtstats
+    CDNA_acl9:
+      Comments: All EBO to BUR SLW
+      Destination:
+        DestinationEnvironment: EC
+        DestinationHostname:
+        DestinationNetworkGroup:
+        DestinationPOP:
+        -
+        DestinationPOPGroup: Back Office
+        DestinationPort:
+        - 5000
+        - 5001
+        - 5002
+        - 5010
+        - 6000
+        - 9200
+        DestinationProtocol:
+        - TCP
+        - UDP
+        DestinationPurpose:
+        DestinationSubPurpose:
+        DestinationVIP: 13351
+        DestinationVLAN:
+        -
+      Source:
+        SourceEnvironment: EC
+        SourceHostname:
+        SourceNetworkGroup:
+        SourcePOP:
+        - EBO
+        SourcePOPGroup: Back Office
+        SourcePort:
+        -
+        SourcePurpose: All
+        SourceSubPurpose: All
+        SourceVIP:
+        SourceVLAN:
+        -
+      Tags:
+      - SLW BUR
+    CDNA_acl10:
+      Comments: EMS to EDGE, WAC, and ADN purge/load
+      Destination:
+        DestinationEnvironment: EC
+        DestinationHostname:
+        DestinationNetworkGroup:
+        DestinationPOP:
+        -
+        DestinationPOPGroup: Edge
+        DestinationPort:
+        - 8900
+        - 22
+        DestinationProtocol:
+        - TCP
+        DestinationPurpose:
+        DestinationSubPurpose:
+        DestinationVIP:
+        DestinationVLAN:
+        - PUBLIC
+      Source:
+        SourceEnvironment: EC
+        SourceHostname:
+        SourceNetworkGroup:
+        SourcePOP:
+        - EBO
+        SourcePOPGroup: Back Office
+        SourcePort:
+        -
+        SourcePurpose: Edge Messaging Service
+        SourceSubPurpose: All
+        SourceVIP:
+        SourceVLAN:
+        -
+      Tags:
+      - CDNA
+      - purge
+      - load
+      - edge
+      - wac
+      - adn
+    CDNA_acl11:
+      Comments: EMS to MCDN purge/load
+      Destination:
+        DestinationEnvironment: EC
+        DestinationHostname:
+        DestinationNetworkGroup:
+        DestinationPOP:
+        -
+        DestinationPOPGroup: MCDN
+        DestinationPort:
+        - 8900
+        - 22
+        DestinationProtocol:
+        - TCP
+        DestinationPurpose:
+        DestinationSubPurpose:
+        DestinationVIP:
+        DestinationVLAN:
+        - PUBLIC
+      Source:
+        SourceEnvironment: EC
+        SourceHostname:
+        SourceNetworkGroup:
+        SourcePOP:
+        - EBO
+        SourcePOPGroup: Back Office
+        SourcePort:
+        -
+        SourcePurpose: Edge Messaging Service
+        SourceSubPurpose: All
+        SourceVIP:
+        SourceVLAN:
+        -
+      Tags:
+      - CDNA
+      - purge
+      - load
+      - MCDN
+    CDNA_acl12:
+      Comments: EMS to Storage purge/load
+      Destination:
+        DestinationEnvironment: EC
+        DestinationHostname:
+        DestinationNetworkGroup:
+        DestinationPOP:
+        -
+        DestinationPOPGroup: Storage
+        DestinationPort:
+        - 8900
+        - 22
+        DestinationProtocol:
+        - TCP
+        DestinationPurpose:
+        DestinationSubPurpose:
+        DestinationVIP:
+        DestinationVLAN:
+        - PUBLIC
+      Source:
+        SourceEnvironment: EC
+        SourceHostname:
+        SourceNetworkGroup:
+        SourcePOP:
+        - EBO
+        SourcePOPGroup: Back Office
+        SourcePort:
+        -
+        SourcePurpose: Edge Messaging Service
+        SourceSubPurpose: All
+        SourceVIP:
+        SourceVLAN:
+        -
+      Tags:
+      - CDNA
+      - purge
+      - load
+      - Storage
+    CDNA_acl13:
+      Comments: EMS to HTMT purge/load
+      Destination:
+        DestinationEnvironment: EC
+        DestinationHostname:
+        DestinationNetworkGroup:
+        DestinationPOP:
+        -
+        DestinationPOPGroup: Edge
+        DestinationPort:
+        - 8900
+        - 22
+        DestinationProtocol:
+        - TCP
+        DestinationPurpose: HTTP Streaming Midtier Server
+        DestinationSubPurpose: All
+        DestinationVIP:
+        DestinationVLAN:
+        -
+      Source:
+        SourceEnvironment: EC
+        SourceHostname:
+        SourceNetworkGroup:
+        SourcePOP:
+        - EBO
+        SourcePOPGroup: Back Office
+        SourcePort:
+        -
+        SourcePurpose: Edge Messaging Service
+        SourceSubPurpose: All
+        SourceVIP:
+        SourceVLAN:
+        -
+      Tags:
+      - CDNA
+      - purge
+      - load
+      - htmt
+    CDNA_acl14:
+      Comments: DBO -> EMS
+      Destination:
+        DestinationEnvironment: EC
+        DestinationHostname:
+        DestinationNetworkGroup:
+        DestinationPOP:
+        - EBO
+        DestinationPOPGroup: Back Office
+        DestinationPort:
+        - 443
+        DestinationProtocol:
+        - TCP
+        DestinationPurpose: Edge Messaging Service
+        DestinationSubPurpose: api
+        DestinationVIP:
+        DestinationVLAN:
+        -
+      Source:
+        SourceEnvironment: EC
+        SourceHostname:
+        SourceNetworkGroup:
+        SourcePOP:
+        - EBO
+        SourcePOPGroup: Back Office
+        SourcePort:
+        -
+        SourcePurpose: Director Back Office
+        SourceSubPurpose: All
+        SourceVIP:
+        SourceVLAN:
+        -
+      Tags:
+      - EMS
+    CDNA_acl15:
+      Comments: EBO -> EMS
+      Destination:
+        DestinationEnvironment: EC
+        DestinationHostname:
+        DestinationNetworkGroup:
+        DestinationPOP:
+        - EBO
+        DestinationPOPGroup: Back Office
+        DestinationPort:
+        - 443
+        DestinationProtocol:
+        - TCP
+        DestinationPurpose:
+        DestinationSubPurpose:
+        DestinationVIP: 55546
+        DestinationVLAN:
+        -
+      Source:
+        SourceEnvironment: EC
+        SourceHostname:
+        SourceNetworkGroup:
+        SourcePOP:
+        - EBO
+        SourcePOPGroup: Back Office
+        SourcePort:
+        -
+        SourcePurpose: All
+        SourceSubPurpose: All
+        SourceVIP:
+        SourceVLAN:
+        -
+      Tags:
+      - EMS
+    CDNA_acl16:
+      Comments: DBO -> SLW
+      Destination:
+        DestinationEnvironment: EC
+        DestinationHostname:
+        DestinationNetworkGroup:
+        DestinationPOP:
+        - EBO
+        DestinationPOPGroup: Back Office
+        DestinationPort:
+        - 443
+        - 5000
+        - 5001
+        - 5002
+        - 5010
+        - 6000
+        - 9200
+        DestinationProtocol:
+        - TCP
+        - UDP
+        DestinationPurpose: System Log Warehouse
+        DestinationSubPurpose: default
+        DestinationVIP:
+        DestinationVLAN:
+        -
+      Source:
+        SourceEnvironment: EC
+        SourceHostname:
+        SourceNetworkGroup:
+        SourcePOP:
+        - EBO
+        SourcePOPGroup: Back Office
+        SourcePort:
+        -
+        SourcePurpose: Director Back Office
+        SourceSubPurpose: All
+        SourceVIP:
+        SourceVLAN:
+        -
+      Tags:
+      - EMS
+    CDNA_acl17:
+      Comments: All EBO to EBO SLW
+      Destination:
+        DestinationEnvironment: EC
+        DestinationHostname:
+        DestinationNetworkGroup:
+        DestinationPOP:
+        -
+        DestinationPOPGroup: Back Office
+        DestinationPort:
+        - 443
+        - 5000
+        - 5001
+        - 5002
+        - 5010
+        - 6000
+        - 9200
+        DestinationProtocol:
+        - TCP
+        - UDP
+        DestinationPurpose:
+        DestinationSubPurpose:
+        DestinationVIP: 55548
+        DestinationVLAN:
+        -
+      Source:
+        SourceEnvironment: EC
+        SourceHostname:
+        SourceNetworkGroup:
+        SourcePOP:
+        - EBO
+        SourcePOPGroup: Back Office
+        SourcePort:
+        -
+        SourcePurpose: All
+        SourceSubPurpose: All
+        SourceVIP:
+        SourceVLAN:
+        -
+      Tags:
+      - SLW EBO
+#    CDNA_acl18:
+#      Comments: All EBO RSTOR to TOA RSTOR
+#      Destination:
+#        DestinationEnvironment: EC
+#        DestinationHostname:
+#        DestinationNetworkGroup:
+#        DestinationPOP:
+#        -
+#        DestinationPOPGroup: Back Office
+#        DestinationPort:
+#        - 22
+#        DestinationProtocol:
+#        - TCP
+#        DestinationPurpose:
+#        DestinationSubPurpose:
+#        DestinationVIP: 41837
+#        DestinationVLAN:
+#        -
+#      Source:
+#        SourceEnvironment: EC
+#        SourceHostname:
+#        SourceNetworkGroup:
+#        SourcePOP:
+#        - EBO
+#        SourcePOPGroup: Back Office
+#        SourcePort:
+#        -
+#        SourcePurpose: Report Storage Server
+#        SourceSubPurpose: All
+#        SourceVIP:
+#        SourceVLAN:
+#        -
+#      Tags:
+#      - RSTOR
+    CDNA_acl19:
+      Comments: EC POPs -> cache rtstats ingest VIP
+      Destination:
+        DestinationEnvironment: EC
+        DestinationHostname:
+        DestinationNetworkGroup:
+        DestinationPOP:
+        - EBO
+        DestinationPOPGroup: Back Office
+        DestinationPort:
+        - 10000-10001
+        DestinationProtocol:
+        - TCP
+        DestinationPurpose:
+        DestinationSubPurpose:
+        DestinationVIP: 55243
+        DestinationVLAN:
+        -
+      Source:
+        SourceEnvironment: EC
+        SourceHostname:
+        SourceNetworkGroup:
+        SourcePOP:
+        -
+        SourcePOPGroup: Edge
+        SourcePort:
+        -
+        SourcePurpose:
+        SourceSubPurpose:
+        SourceVIP:
+        SourceVLAN:
+        - PUBLIC
+      Tags:
+      - rtstats
+    CDNA_acl20:
+      Comments: EC POPs -> wac rtstats ingest VIP
+      Destination:
+        DestinationEnvironment: EC
+        DestinationHostname:
+        DestinationNetworkGroup:
+        DestinationPOP:
+        - EBO
+        DestinationPOPGroup: Back Office
+        DestinationPort:
+        - 10000-10001
+        DestinationProtocol:
+        - TCP
+        DestinationPurpose:
+        DestinationSubPurpose:
+        DestinationVIP: 55239
+        DestinationVLAN:
+        -
+      Source:
+        SourceEnvironment: EC
+        SourceHostname:
+        SourceNetworkGroup:
+        SourcePOP:
+        -
+        SourcePOPGroup: Edge
+        SourcePort:
+        -
+        SourcePurpose:
+        SourceSubPurpose:
+        SourceVIP:
+        SourceVLAN:
+        - PUBLIC
+      Tags:
+      - rtstats
+    CDNA_acl21:
+      Comments: EC POPs -> adn rtstats ingest VIP
+      Destination:
+        DestinationEnvironment: EC
+        DestinationHostname:
+        DestinationNetworkGroup:
+        DestinationPOP:
+        - EBO
+        DestinationPOPGroup: Back Office
+        DestinationPort:
+        - 10000-10001
+        DestinationProtocol:
+        - TCP
+        DestinationPurpose:
+        DestinationSubPurpose:
+        DestinationVIP: 55241
+        DestinationVLAN:
+        -
+      Source:
+        SourceEnvironment: EC
+        SourceHostname:
+        SourceNetworkGroup:
+        SourcePOP:
+        -
+        SourcePOPGroup: Edge
+        SourcePort:
+        -
+        SourcePurpose:
+        SourceSubPurpose:
+        SourceVIP:
+        SourceVLAN:
+        - PUBLIC
+      Tags:
+      - rtstats
+    CDNA_acl22:
+      Comments: EBO -> wac rtstats query VIP
+      Destination:
+        DestinationEnvironment: EC
+        DestinationHostname:
+        DestinationNetworkGroup:
+        DestinationPOP:
+        - EBO
+        DestinationPOPGroup: Back Office
+        DestinationPort:
+        - 80
+        - 9995-9999
+        DestinationProtocol:
+        - TCP
+        DestinationPurpose:
+        DestinationSubPurpose:
+        DestinationVIP: 55238
+        DestinationVLAN:
+        -
+      Source:
+        SourceEnvironment: EC
+        SourceHostname:
+        SourceNetworkGroup:
+        SourcePOP:
+        - EBO
+        SourcePOPGroup: Back Office
+        SourcePort:
+        -
+        SourcePurpose: All
+        SourceSubPurpose: All
+        SourceVIP:
+        SourceVLAN:
+        -
+      Tags:
+      - rtstats
+    CDNA_acl23:
+      Comments: EBO -> adn rtstats query VIP
+      Destination:
+        DestinationEnvironment: EC
+        DestinationHostname:
+        DestinationNetworkGroup:
+        DestinationPOP:
+        - EBO
+        DestinationPOPGroup: Back Office
+        DestinationPort:
+        - 80
+        - 9995-9999
+        DestinationProtocol:
+        - TCP
+        DestinationPurpose:
+        DestinationSubPurpose:
+        DestinationVIP: 55240
+        DestinationVLAN:
+        -
+      Source:
+        SourceEnvironment: EC
+        SourceHostname:
+        SourceNetworkGroup:
+        SourcePOP:
+        - EBO
+        SourcePOPGroup: Back Office
+        SourcePort:
+        -
+        SourcePurpose: All
+        SourceSubPurpose: All
+        SourceVIP:
+        SourceVLAN:
+        -
+      Tags:
+      - rtstats
+    CDNA_acl24:
+      Comments: EC POPs -> (MCDN) cache rtstats ingest VIP
+      Destination:
+        DestinationEnvironment: EC
+        DestinationHostname:
+        DestinationNetworkGroup:
+        DestinationPOP:
+        - EBO
+        DestinationPOPGroup: Back Office
+        DestinationPort:
+        - 10000-10001
+        DestinationProtocol:
+        - TCP
+        DestinationPurpose:
+        DestinationSubPurpose:
+        DestinationVIP: 55243
+        DestinationVLAN:
+        -
+      Source:
+        SourceEnvironment: EC
+        SourceHostname:
+        SourceNetworkGroup:
+        SourcePOP:
+        -
+        SourcePOPGroup: MCDN
+        SourcePort:
+        -
+        SourcePurpose:
+        SourceSubPurpose:
+        SourceVIP:
+        SourceVLAN:
+        - PUBLIC
+      Tags:
+      - rtstats
+    CDNA_acl25:
+      Comments: EC POPs -> (MCDN) wac rtstats ingest VIP
+      Destination:
+        DestinationEnvironment: EC
+        DestinationHostname:
+        DestinationNetworkGroup:
+        DestinationPOP:
+        - EBO
+        DestinationPOPGroup: Back Office
+        DestinationPort:
+        - 10000-10001
+        DestinationProtocol:
+        - TCP
+        DestinationPurpose:
+        DestinationSubPurpose:
+        DestinationVIP: 55239
+        DestinationVLAN:
+        -
+      Source:
+        SourceEnvironment: EC
+        SourceHostname:
+        SourceNetworkGroup:
+        SourcePOP:
+        -
+        SourcePOPGroup: MCDN
+        SourcePort:
+        -
+        SourcePurpose:
+        SourceSubPurpose:
+        SourceVIP:
+        SourceVLAN:
+        - PUBLIC
+      Tags:
+      - rtstats
+    CDNA_acl26:
+      Comments: EC POPs -> (MCDN) adn rtstats ingest VIP
+      Destination:
+        DestinationEnvironment: EC
+        DestinationHostname:
+        DestinationNetworkGroup:
+        DestinationPOP:
+        - EBO
+        DestinationPOPGroup: Back Office
+        DestinationPort:
+        - 10000-10001
+        DestinationProtocol:
+        - TCP
+        DestinationPurpose:
+        DestinationSubPurpose:
+        DestinationVIP: 55241
+        DestinationVLAN:
+        -
+      Source:
+        SourceEnvironment: EC
+        SourceHostname:
+        SourceNetworkGroup:
+        SourcePOP:
+        -
+        SourcePOPGroup: MCDN
+        SourcePort:
+        -
+        SourcePurpose:
+        SourceSubPurpose:
+        SourceVIP:
+        SourceVLAN:
+        - PUBLIC
+      Tags:
+      - rtstats
+    CDNA_acl27:
+      Comments: EMS to Lab purge/load
+      Destination:
+        DestinationEnvironment: EC
+        DestinationHostname:
+        DestinationNetworkGroup:
+        DestinationPOP:
+        -
+        DestinationPOPGroup: Lab
+        DestinationPort:
+        - 8900
+        - 22
+        DestinationProtocol:
+        - TCP
+        DestinationPurpose:
+        DestinationSubPurpose:
+        DestinationVIP:
+        DestinationVLAN:
+        - PUBLIC
+      Source:
+        SourceEnvironment: EC
+        SourceHostname:
+        SourceNetworkGroup:
+        SourcePOP:
+        - EBO
+        SourcePOPGroup: Back Office
+        SourcePort:
+        -
+        SourcePurpose: Edge Messaging Service
+        SourceSubPurpose: All
+        SourceVIP:
+        SourceVLAN:
+        -
+      Tags:
+      - CDNA
+      - purge
+      - load
+      - Lab
+    CDNA_acl28:
+      Comments: api.edgecast.com
+      Destination:
+        DestinationEnvironment: EC
+        DestinationHostname:
+        DestinationNetworkGroup:
+        DestinationPOP:
+        -
+        DestinationPOPGroup: Back Office
+        DestinationPort:
+        - 443
+        DestinationProtocol:
+        - TCP
+        DestinationPurpose:
+        DestinationSubPurpose:
+        DestinationVIP: 10942
+        DestinationVLAN:
+        -
+      Source:
+        SourceEnvironment: EC
+        SourceHostname:
+        SourceNetworkGroup:
+        SourcePOP:
+        - EBO
+        SourcePOPGroup: Back Office
+        SourcePort:
+        -
+        SourcePurpose: Edge Messaging Service
+        SourceSubPurpose: All
+        SourceVIP:
+        SourceVLAN:
+        -
+      Tags:
+      - CDNA
+      - uber
+#    CDNA_acl29:
+#      Comments: dbo -> kafka
+#      Destination:
+#        DestinationEnvironment: EC
+#        DestinationHostname:
+#        DestinationNetworkGroup:
+#        DestinationPOP:
+#        - EBO
+#        DestinationPOPGroup: Back Office
+#        DestinationPort:
+#        - 9092-9093
+#        DestinationProtocol:
+#        - TCP
+#        DestinationPurpose: Kafka
+#        DestinationSubPurpose: All
+#        DestinationVIP:
+#        DestinationVLAN:
+#        -
+#      Source:
+#        SourceEnvironment: EC
+#        SourceHostname:
+#        SourceNetworkGroup:
+#        SourcePOP:
+#        - EBO
+#        SourcePOPGroup: Back Office
+#        SourcePort:
+#        -
+#        SourcePurpose: Director Back Office
+#        SourceSubPurpose: All
+#        SourceVIP:
+#        SourceVLAN:
+#        -
+#      Tags:
+#      - kafka
+    CDNA_acl30:
+      Comments: EC POPs (Edge) -> kafka VIP
+      Destination:
+        DestinationEnvironment: EC
+        DestinationHostname:
+        DestinationNetworkGroup:
+        DestinationPOP:
+        - EBO
+        DestinationPOPGroup: Back Office
+        DestinationPort:
+        - 9093
+        DestinationProtocol:
+        - TCP
+        DestinationPurpose:
+        DestinationSubPurpose:
+        DestinationVIP: 55812
+        DestinationVLAN:
+        -
+      Source:
+        SourceEnvironment: EC
+        SourceHostname:
+        SourceNetworkGroup:
+        SourcePOP:
+        -
+        SourcePOPGroup: Edge
+        SourcePort:
+        -
+        SourcePurpose:
+        SourceSubPurpose:
+        SourceVIP:
+        SourceVLAN:
+        - PUBLIC
+      Tags:
+      - kafka
+    CDNA_acl31:
+      Comments: EC POPs (MCDN) -> kafka VIP
+      Destination:
+        DestinationEnvironment: EC
+        DestinationHostname:
+        DestinationNetworkGroup:
+        DestinationPOP:
+        - EBO
+        DestinationPOPGroup: Back Office
+        DestinationPort:
+        - 9093
+        DestinationProtocol:
+        - TCP
+        DestinationPurpose:
+        DestinationSubPurpose:
+        DestinationVIP: 55812
+        DestinationVLAN:
+        -
+      Source:
+        SourceEnvironment: EC
+        SourceHostname:
+        SourceNetworkGroup:
+        SourcePOP:
+        -
+        SourcePOPGroup: MCDN
+        SourcePort:
+        -
+        SourcePurpose:
+        SourceSubPurpose:
+        SourceVIP:
+        SourceVLAN:
+        - PUBLIC
+      Tags:
+      - kafka
+    CDNA_acl32:
+      Comments: EC POPs (Lab) -> kafka VIP
+      Destination:
+        DestinationEnvironment: EC
+        DestinationHostname:
+        DestinationNetworkGroup:
+        DestinationPOP:
+        - EBO
+        DestinationPOPGroup: Back Office
+        DestinationPort:
+        - 9093
+        DestinationProtocol:
+        - TCP
+        DestinationPurpose:
+        DestinationSubPurpose:
+        DestinationVIP: 55812
+        DestinationVLAN:
+        -
+      Source:
+        SourceEnvironment: EC
+        SourceHostname:
+        SourceNetworkGroup:
+        SourcePOP:
+        -
+        SourcePOPGroup: Lab
+        SourcePort:
+        -
+        SourcePurpose:
+        SourceSubPurpose:
+        SourceVIP:
+        SourceVLAN:
+        - PUBLIC
+      Tags:
+      - kafka
+#    CDNA_acl33:
+#      Comments: EC POPs (Edge) -> Kafka purpose
+#      Destination:
+#        DestinationEnvironment: EC
+#        DestinationHostname:
+#        DestinationNetworkGroup:
+#        DestinationPOP:
+#        - EBO
+#        DestinationPOPGroup: Back Office
+#        DestinationPort:
+#        - 9093
+#        DestinationProtocol:
+#        - TCP
+#        DestinationPurpose: Kafka
+#        DestinationSubPurpose: All
+#        DestinationVIP:
+#        DestinationVLAN:
+#        -
+#      Source:
+#        SourceEnvironment: EC
+#        SourceHostname:
+#        SourceNetworkGroup:
+#        SourcePOP:
+#        -
+#        SourcePOPGroup: Edge
+#        SourcePort:
+#        -
+#        SourcePurpose:
+#        SourceSubPurpose:
+#        SourceVIP:
+#        SourceVLAN:
+#        - PUBLIC
+#      Tags:
+#      - kafka
+#    CDNA_acl34:
+#      Comments: EC POPs (MCDN) -> Kafka purpose
+#      Destination:
+#        DestinationEnvironment: EC
+#        DestinationHostname:
+#        DestinationNetworkGroup:
+#        DestinationPOP:
+#        - EBO
+#        DestinationPOPGroup: Back Office
+#        DestinationPort:
+#        - 9093
+#        DestinationProtocol:
+#        - TCP
+#        DestinationPurpose: Kafka
+#        DestinationSubPurpose: All
+#        DestinationVIP:
+#        DestinationVLAN:
+#        -
+#      Source:
+#        SourceEnvironment: EC
+#        SourceHostname:
+#        SourceNetworkGroup:
+#        SourcePOP:
+#        -
+#        SourcePOPGroup: MCDN
+#        SourcePort:
+#        -
+#        SourcePurpose:
+#        SourceSubPurpose:
+#        SourceVIP:
+#        SourceVLAN:
+#        - PUBLIC
+#      Tags:
+#      - kafka
+#    CDNA_acl35:
+#      Comments: EC POPs (Lab) -> Kafka purpose
+#      Destination:
+#        DestinationEnvironment: EC
+#        DestinationHostname:
+#        DestinationNetworkGroup:
+#        DestinationPOP:
+#        - EBO
+#        DestinationPOPGroup: Back Office
+#        DestinationPort:
+#        - 9093
+#        DestinationProtocol:
+#        - TCP
+#        DestinationPurpose: Kafka
+#        DestinationSubPurpose: All
+#        DestinationVIP:
+#        DestinationVLAN:
+#        -
+#      Source:
+#        SourceEnvironment: EC
+#        SourceHostname:
+#        SourceNetworkGroup:
+#        SourcePOP:
+#        -
+#        SourcePOPGroup: Lab
+#        SourcePort:
+#        -
+#        SourcePurpose:
+#        SourceSubPurpose:
+#        SourceVIP:
+#        SourceVLAN:
+#        - PUBLIC
+#      Tags:
+#      - kafka
+    CDNA_acl36:
+      Comments: "ACL to allow CDNA Jenkins to access EBO API"
+      Destination:
+        DestinationEnvironment: EC
+        DestinationHostname: atlantis.ebo.edgecastcdn.net
+        DestinationNetworkGroup:
+        DestinationPOP:
+        - EBO
+        DestinationPOPGroup: Internet
+        DestinationPort:
+        - 443
+        DestinationProtocol:
+        - TCP
+        DestinationPurpose:
+        DestinationSubPurpose:
+        DestinationVIP:
+        DestinationVLAN:
+        -
+      Source:
+        SourceEnvironment: EC
+        SourceHostname:
+        SourceNetworkGroup:
+        SourcePOP:
+        - ACL
+        SourcePOPGroup: Edge
+        SourcePort:
+        - 443
+        SourcePurpose:
+        SourceSubPurpose:
+        SourceVIP:
+        SourceVLAN:
+        - cdna:private:us-west-2a
+      Tags:
+      - aws
+      - cdna
+      - jenkins
+      - ebo
+    CDNA_acl37:
+      Comments: "ACL to allow CDNA Jenkins to access EBO API"
+      Destination:
+        DestinationEnvironment: EC
+        DestinationHostname:
+        DestinationNetworkGroup:
+        DestinationPOP:
+        - EBO
+        DestinationPOPGroup: Back Office
+        DestinationPort:
+        - 443
+        DestinationProtocol:
+        - TCP
+        DestinationPurpose: Spare
+        DestinationSubPurpose: default
+        DestinationVIP:
+        DestinationVLAN:
+        -
+      Source:
+        SourceEnvironment: EC
+        SourceHostname:
+        SourceNetworkGroup:
+        SourcePOP:
+        - ACL
+        SourcePOPGroup: Edge
+        SourcePort:
+        - 443
+        SourcePurpose:
+        SourceSubPurpose:
+        SourceVIP:
+        SourceVLAN:
+        - cdna:private:us-west-2b
+      Tags:
+      - aws
+      - cdna
+      - jenkins
+      - ebo
+#    CDNA_acl38:
+#      Comments: api-int.edgecast.com
+#      Destination:
+#        DestinationEnvironment: EC
+#        DestinationHostname:
+#        DestinationNetworkGroup:
+#        DestinationPOP:
+#        -
+#        DestinationPOPGroup: Back Office
+#        DestinationPort:
+#        - 443
+#        DestinationProtocol:
+#        - TCP
+#        DestinationPurpose:
+#        DestinationSubPurpose:
+#        DestinationVIP: 10943
+#        DestinationVLAN:
+#        -
+#      Source:
+#        SourceEnvironment: EC
+#        SourceHostname:
+#        SourceNetworkGroup:
+#        SourcePOP:
+#        - EBO
+#        SourcePOPGroup: Back Office
+#        SourcePort:
+#        -
+#        SourcePurpose: Real-Time Log Delivery
+#        SourceSubPurpose: All
+#        SourceVIP:
+#        SourceVLAN:
+#        -
+#      Tags:
+#      - CDNA
+#      - rtld
+#    CDNA_acl39:
+#      Comments: api-int-secure
+#      Destination:
+#        DestinationEnvironment: EC
+#        DestinationHostname:
+#        DestinationNetworkGroup:
+#        DestinationPOP:
+#        -
+#        DestinationPOPGroup: Back Office
+#        DestinationPort:
+#        - 443
+#        DestinationProtocol:
+#        - TCP
+#        DestinationPurpose:
+#        DestinationSubPurpose:
+#        DestinationVIP: 15193
+#        DestinationVLAN:
+#        -
+#      Source:
+#        SourceEnvironment: EC
+#        SourceHostname:
+#        SourceNetworkGroup:
+#        SourcePOP:
+#        - EBO
+#        SourcePOPGroup: Back Office
+#        SourcePort:
+#        -
+#        SourcePurpose: Real-Time Log Delivery
+#        SourceSubPurpose: All
+#        SourceVIP:
+#        SourceVLAN:
+#        -
+#      Tags:
+#      - CDNA
+#      - rtld
+#    CDNA_acl40:
+#      Comments: dbo -> livestore
+#      Destination:
+#        DestinationEnvironment: EC
+#        DestinationHostname:
+#        DestinationNetworkGroup:
+#        DestinationPOP:
+#        - EBO
+#        DestinationPOPGroup: Back Office
+#        DestinationPort:
+#        - 80
+#        DestinationProtocol:
+#        - TCP
+#        DestinationPurpose: livestore
+#        DestinationSubPurpose: All
+#        DestinationVIP:
+#        DestinationVLAN:
+#        -
+#      Source:
+#        SourceEnvironment: EC
+#        SourceHostname:
+#        SourceNetworkGroup:
+#        SourcePOP:
+#        - EBO
+#        SourcePOPGroup: Back Office
+#        SourcePort:
+#        -
+#        SourcePurpose: Director Back Office
+#        SourceSubPurpose: All
+#        SourceVIP:
+#        SourceVLAN:
+#        -
+#      Tags:
+#      - livestore
+    CDNA_acl41:
+      Comments: EBO -> livestore VIP
+      Destination:
+        DestinationEnvironment: EC
+        DestinationHostname:
+        DestinationNetworkGroup:
+        DestinationPOP:
+        - EBO
+        DestinationPOPGroup: Back Office
+        DestinationPort:
+        - 80
+        DestinationProtocol:
+        - TCP
+        DestinationPurpose:
+        DestinationSubPurpose:
+        DestinationVIP: 55814
+        DestinationVLAN:
+        -
+      Source:
+        SourceEnvironment: EC
+        SourceHostname:
+        SourceNetworkGroup:
+        SourcePOP:
+        - EBO
+        SourcePOPGroup: Back Office
+        SourcePort:
+        -
+        SourcePurpose: All
+        SourceSubPurpose: All
+        SourceVIP:
+        SourceVLAN:
+        -
+      Tags:
+      - livestore
+    CDNA_acl42:
+      Comments: Allow Edge servers to SFTP logs to LAS
+      Destination:
+        DestinationEnvironment: EC
+        DestinationHostname:
+        DestinationNetworkGroup:
+        DestinationPOP:
+        - EBO
+        DestinationPOPGroup: Back Office
+        DestinationPort:
+        - 22
+        DestinationProtocol:
+        - TCP
+        DestinationPurpose: Log Storage Server
+        DestinationSubPurpose: All
+        DestinationVIP:
+        DestinationVLAN:
+        -
+      Source:
+        SourceEnvironment: EC
+        SourceHostname:
+        SourceNetworkGroup:
+        SourcePOP:
+        -
+        SourcePOPGroup: Edge
+        SourcePort:
+        -
+        SourcePurpose:
+        SourceSubPurpose:
+        SourceVIP:
+        SourceVLAN:
+        - PUBLIC
+      Tags:
+      - LAS
+    CDNA_acl43:
+      Comments: Allow Edge servers to SFTP logs to LAS VIP
+      Destination:
+        DestinationEnvironment: EC
+        DestinationHostname:
+        DestinationNetworkGroup:
+        DestinationPOP:
+        - EBO
+        DestinationPOPGroup: Back Office
+        DestinationPort:
+        - 22
+        DestinationProtocol:
+        - TCP
+        DestinationPurpose:
+        DestinationSubPurpose:
+        DestinationVIP: 55813
+        DestinationVLAN:
+        -
+      Source:
+        SourceEnvironment: EC
+        SourceHostname:
+        SourceNetworkGroup:
+        SourcePOP:
+        -
+        SourcePOPGroup: Edge
+        SourcePort:
+        -
+        SourcePurpose:
+        SourceSubPurpose:
+        SourceVIP:
+        SourceVLAN:
+        - PUBLIC
+      Tags:
+      - LAS
+    CDNA_acl44:
+      Comments: Allow MCDN Edge servers to SFTP logs to LAS
+      Destination:
+        DestinationEnvironment: EC
+        DestinationHostname:
+        DestinationNetworkGroup:
+        DestinationPOP:
+        - EBO
+        DestinationPOPGroup: Back Office
+        DestinationPort:
+        - 22
+        DestinationProtocol:
+        - TCP
+        DestinationPurpose: Log Storage Server
+        DestinationSubPurpose: All
+        DestinationVIP:
+        DestinationVLAN:
+        -
+      Source:
+        SourceEnvironment: EC
+        SourceHostname:
+        SourceNetworkGroup:
+        SourcePOP:
+        -
+        SourcePOPGroup: MCDN
+        SourcePort:
+        -
+        SourcePurpose:
+        SourceSubPurpose:
+        SourceVIP:
+        SourceVLAN:
+        - PUBLIC
+      Tags:
+      - LAS
+    CDNA_acl45:
+      Comments: Allow MCDN Edge servers to SFTP logs to LAS VIP
+      Destination:
+        DestinationEnvironment: EC
+        DestinationHostname:
+        DestinationNetworkGroup:
+        DestinationPOP:
+        - EBO
+        DestinationPOPGroup: Back Office
+        DestinationPort:
+        - 22
+        DestinationProtocol:
+        - TCP
+        DestinationPurpose:
+        DestinationSubPurpose:
+        DestinationVIP: 55813
+        DestinationVLAN:
+        -
+      Source:
+        SourceEnvironment: EC
+        SourceHostname:
+        SourceNetworkGroup:
+        SourcePOP:
+        -
+        SourcePOPGroup: MCDN
+        SourcePort:
+        -
+        SourcePurpose:
+        SourceSubPurpose:
+        SourceVIP:
+        SourceVLAN:
+        - PUBLIC
+      Tags:
+      - LAS
+    CDNA_acl46:
+      Comments: Allow (Lab) Edge servers to SFTP logs to LAS
+      Destination:
+        DestinationEnvironment: EC
+        DestinationHostname:
+        DestinationNetworkGroup:
+        DestinationPOP:
+        - EBO
+        DestinationPOPGroup: Back Office
+        DestinationPort:
+        - 22
+        DestinationProtocol:
+        - TCP
+        DestinationPurpose: Log Storage Server
+        DestinationSubPurpose: All
+        DestinationVIP:
+        DestinationVLAN:
+        -
+      Source:
+        SourceEnvironment: EC
+        SourceHostname:
+        SourceNetworkGroup:
+        SourcePOP:
+        -
+        SourcePOPGroup: Lab
+        SourcePort:
+        -
+        SourcePurpose:
+        SourceSubPurpose:
+        SourceVIP:
+        SourceVLAN:
+        - PUBLIC
+      Tags:
+      - LAS
+    CDNA_acl47:
+      Comments: Allow (Lab) Edge servers to SFTP logs to LAS VIP
+      Destination:
+        DestinationEnvironment: EC
+        DestinationHostname:
+        DestinationNetworkGroup:
+        DestinationPOP:
+        - EBO
+        DestinationPOPGroup: Back Office
+        DestinationPort:
+        - 22
+        DestinationProtocol:
+        - TCP
+        DestinationPurpose:
+        DestinationSubPurpose:
+        DestinationVIP: 55813
+        DestinationVLAN:
+        -
+      Source:
+        SourceEnvironment: EC
+        SourceHostname:
+        SourceNetworkGroup:
+        SourcePOP:
+        -
+        SourcePOPGroup: Lab
+        SourcePort:
+        -
+        SourcePurpose:
+        SourceSubPurpose:
+        SourceVIP:
+        SourceVLAN:
+        - PUBLIC
+      Tags:
+      - LAS
+    CDNA_acl48:
+      Comments: EDM AWS -> kafka VIP
+      Destination:
+        DestinationEnvironment: EC
+        DestinationHostname:
+        DestinationNetworkGroup:
+        DestinationPOP:
+        - EBO
+        DestinationPOPGroup: Back Office
+        DestinationPort:
+        - 9092-9093
+        DestinationProtocol:
+        - TCP
+        DestinationPurpose:
+        DestinationSubPurpose:
+        DestinationVIP: 55812
+        DestinationVLAN:
+        -
+      Source:
+        SourceEnvironment: EC
+        SourceHostname:
+        SourceNetworkGroup:
+        SourcePOP:
+        - ACL
+        SourcePOPGroup: Edge
+        SourcePort:
+        -
+        SourcePurpose:
+        SourceSubPurpose:
+        SourceVIP:
+        SourceVLAN:
+        - edm:private:us-east-1a
+        - edm:private:us-east-1b
+      Tags:
+      - kafka
+#    CDNA_acl49:
+#      Comments: EDM AWS -> Kafka purpose
+#      Destination:
+#        DestinationEnvironment: EC
+#        DestinationHostname:
+#        DestinationNetworkGroup:
+#        DestinationPOP:
+#        - EBO
+#        DestinationPOPGroup: Back Office
+#        DestinationPort:
+#        - 9092-9093
+#        DestinationProtocol:
+#        - TCP
+#        DestinationPurpose: Kafka
+#        DestinationSubPurpose: All
+#        DestinationVIP:
+#        DestinationVLAN:
+#        -
+#      Source:
+#        SourceEnvironment: EC
+#        SourceHostname:
+#        SourceNetworkGroup:
+#        SourcePOP:
+#        - ACL
+#        SourcePOPGroup: Edge
+#        SourcePort:
+#        -
+#        SourcePurpose:
+#        SourceSubPurpose:
+#        SourceVIP:
+#        SourceVLAN:
+#        - edm:private:us-east-1a
+#        - edm:private:us-east-1b
+#      Tags:
+#      - kafka
+    CDNA_acl50:
+      Comments: All EBO_CDNA -> SQL
+      Destination:
+        DestinationEnvironment: EC
+        DestinationHostname:
+        DestinationNetworkGroup:
+        DestinationPOP:
+        -
+        DestinationPOPGroup: Back Office
+        DestinationPort:
+        - 41433-41434
+        DestinationProtocol:
+        - TCP
+        DestinationPurpose: SQL Cluster Resource
+        DestinationSubPurpose: All
+        DestinationVIP:
+        DestinationVLAN:
+        -
+      Source:
+        SourceEnvironment: EC
+        SourceHostname:
+        SourceNetworkGroup:
+        SourcePOP:
+        - EBO
+        SourcePOPGroup: Back Office
+        SourcePort:
+        -
+        SourcePurpose:
+        SourceSubPurpose:
+        SourceVIP:
+        SourceVLAN:
+        - EBO_CDNA
+      Tags:
+      - SQL
+#    CDNA_acl51:
+#     Comments: RTLD to anywhere https
+#     Destination:
+#       DestinationEnvironment: EC
+#       DestinationHostname: Any
+#       DestinationNetworkGroup:
+#       DestinationPOP:
+#       -
+#       DestinationPOPGroup: Internet
+#       DestinationPort:
+#       - 443
+#       DestinationProtocol:
+#       - TCP
+#       DestinationPurpose:
+#       DestinationSubPurpose:
+#       DestinationVIP:
+#       DestinationVLAN:
+#       -
+#     Source:
+#       SourceEnvironment: EC
+#       SourceHostname:
+#       SourceNetworkGroup:
+#       SourcePOP:
+#       - EBO
+#       SourcePOPGroup: Back Office
+#       SourcePort:
+#       -
+#       SourcePurpose: Real-Time Log Delivery
+#       SourceSubPurpose: All
+#       SourceVIP:
+#       SourceVLAN:
+#       -
+#     Tags:
+#       - rtld
+#    CDNA_acl52:
+#      Comments: rtld -> kafka VIP
+#      Destination:
+#        DestinationEnvironment: EC
+#        DestinationHostname:
+#        DestinationNetworkGroup:
+#        DestinationPOP:
+#        - EBO
+#        DestinationPOPGroup: Back Office
+#        DestinationPort:
+#        - 9092
+#        - 9093
+#        DestinationProtocol:
+#        - TCP
+#        DestinationPurpose:
+#        DestinationSubPurpose:
+#        DestinationVIP: 55812
+#        DestinationVLAN:
+#        -
+#      Source:
+#        SourceEnvironment: EC
+#        SourceHostname:
+#        SourceNetworkGroup:
+#        SourcePOP:
+#        - EBO
+#        SourcePOPGroup: Back Office
+#        SourcePort:
+#        -
+#        SourcePurpose: Real-Time Log Delivery
+#        SourceSubPurpose: All
+#        SourceVIP:
+#        SourceVLAN:
+#        -
+#      Tags:
+#      - kafka
+#      - rtld
+#    CDNA_acl53:
+#      Comments: livestore -> marlin-ingest.ia.ceaws.edgecastcdn.net
+#      Destination:
+#        DestinationEnvironment: EC
+#        DestinationHostname: marlin-ingest.ia.ceaws.edgecastcdn.net
+#        DestinationNetworkGroup:
+#        DestinationPOP:
+#        -
+#        DestinationPOPGroup: Internet
+#        DestinationPort:
+#        - 443
+#        DestinationProtocol:
+#        - TCP
+#        DestinationPurpose:
+#        DestinationSubPurpose:
+#        DestinationVIP:
+#        DestinationVLAN:
+#        -
+#      Source:
+#        SourceEnvironment: EC
+#        SourceHostname:
+#        SourceNetworkGroup:
+#        SourcePOP:
+#        - EBO
+#        SourcePOPGroup: Back Office
+#        SourcePort:
+#        -
+#        SourcePurpose: livestore
+#        SourceSubPurpose: All
+#        SourceVIP:
+#        SourceVLAN:
+#        -
+#      Tags:
+#      - livestore
+#    CDNA_acl54:
+#      Comments: livestore -> prod2-old-servers-tsdb.ia.ceaws.edgecastcdn.net
+#      Destination:
+#        DestinationEnvironment: EC
+#        DestinationHostname: prod2-old-servers-tsdb.ia.ceaws.edgecastcdn.net
+#        DestinationNetworkGroup:
+#        DestinationPOP:
+#        -
+#        DestinationPOPGroup: Internet
+#        DestinationPort:
+#        - 443
+#        DestinationProtocol:
+#        - TCP
+#        DestinationPurpose:
+#        DestinationSubPurpose:
+#        DestinationVIP:
+#        DestinationVLAN:
+#        -
+#      Source:
+#        SourceEnvironment: EC
+#        SourceHostname:
+#        SourceNetworkGroup:
+#        SourcePOP:
+#        - EBO
+#        SourcePOPGroup: Back Office
+#        SourcePort:
+#        -
+#        SourcePurpose: livestore
+#        SourceSubPurpose: All
+#        SourceVIP:
+#        SourceVLAN:
+#        -
+#      Tags:
+#      - livestore
+#    CDNA_acl55:
+#      Comments: livestore -> marlin.edgecast.com
+#      Destination:
+#        DestinationEnvironment: EC
+#        DestinationHostname: marlin.edgecast.com
+#        DestinationNetworkGroup:
+#        DestinationPOP:
+#        -
+#        DestinationPOPGroup: Internet
+#        DestinationPort:
+#        - 443
+#        DestinationProtocol:
+#        - TCP
+#        DestinationPurpose:
+#        DestinationSubPurpose:
+#        DestinationVIP:
+#        DestinationVLAN:
+#        -
+#      Source:
+#        SourceEnvironment: EC
+#        SourceHostname:
+#        SourceNetworkGroup:
+#        SourcePOP:
+#        - EBO
+#        SourcePOPGroup: Back Office
+#        SourcePort:
+#        -
+#        SourcePurpose: livestore
+#        SourceSubPurpose: All
+#        SourceVIP:
+#        SourceVLAN:
+#        -
+#      Tags:
+#      - livestore
+    CDNA_acl56:
+      Comments: EMS EBO to EMS BUR
+      Destination:
+        DestinationEnvironment: EC
+        DestinationHostname:
+        DestinationNetworkGroup:
+        DestinationPOP:
+        - BUR
+        DestinationPOPGroup: Back Office
+        DestinationPort:
+        - 27017
+        DestinationProtocol:
+        - TCP
+        - UDP
+        DestinationPurpose: Edge Messaging Service
+        DestinationSubPurpose: All
+        DestinationVIP:
+        DestinationVLAN:
+        -
+      Source:
+        SourceEnvironment: EC
+        SourceHostname:
+        SourceNetworkGroup:
+        SourcePOP:
+        - EBO
+        SourcePOPGroup: Back Office
+        SourcePort:
+        -
+        SourcePurpose: Edge Messaging Service
+        SourceSubPurpose: All
+        SourceVIP:
+        SourceVLAN:
+        -
+      Tags:
+      - EMS EBO to BUR
+    CDNA_acl57:
+      Comments: EMS EBO to EMSDB BUR
+      Destination:
+        DestinationEnvironment: EC
+        DestinationHostname:
+        DestinationNetworkGroup:
+        DestinationPOP:
+        - BUR
+        DestinationPOPGroup: Back Office
+        DestinationPort:
+        - 27018
+        - 27019
+        DestinationProtocol:
+        - TCP
+        - UDP
+        DestinationPurpose: Edge Messaging Service Database
+        DestinationSubPurpose: All
+        DestinationVIP:
+        DestinationVLAN:
+        -
+      Source:
+        SourceEnvironment: EC
+        SourceHostname:
+        SourceNetworkGroup:
+        SourcePOP:
+        - EBO
+        SourcePOPGroup: Back Office
+        SourcePort:
+        -
+        SourcePurpose: Edge Messaging Service
+        SourceSubPurpose: All
+        SourceVIP:
+        SourceVLAN:
+        -
+      Tags:
+      - EMS EBO to EMSDB BUR
+    CDNA_acl58:
+      Comments: EMSDB EBO to EMSDB BUR
+      Destination:
+        DestinationEnvironment: EC
+        DestinationHostname:
+        DestinationNetworkGroup:
+        DestinationPOP:
+        - BUR
+        DestinationPOPGroup: Back Office
+        DestinationPort:
+        - 27018
+        - 27019
+        DestinationProtocol:
+        - TCP
+        - UDP
+        DestinationPurpose: Edge Messaging Service Database
+        DestinationSubPurpose: All
+        DestinationVIP:
+        DestinationVLAN:
+        -
+      Source:
+        SourceEnvironment: EC
+        SourceHostname:
+        SourceNetworkGroup:
+        SourcePOP:
+        - EBO
+        SourcePOPGroup: Back Office
+        SourcePort:
+        -
+        SourcePurpose: Edge Messaging Service Database
+        SourceSubPurpose: All
+        SourceVIP:
+        SourceVLAN:
+        -
+      Tags:
+      - EMSDB EBO to EMSDB BUR
+#    CDNA_acl59:
+#      Comments: slack alerts from ealert
+#      Destination:
+#        DestinationEnvironment: EC
+#        DestinationHostname: hooks.slack.com
+#        DestinationNetworkGroup:
+#        DestinationPOP:
+#        -
+#        DestinationPOPGroup: Internet
+#        DestinationPort:
+#        - 443
+#        DestinationProtocol:
+#        - TCP
+#        DestinationPurpose:
+#        DestinationSubPurpose:
+#        DestinationVIP:
+#        DestinationVLAN:
+#        -
+#      Source:
+#        SourceEnvironment: EC
+#        SourceHostname:
+#        SourceNetworkGroup:
+#        SourcePOP:
+#        - EBO
+#        SourcePOPGroup: Back Office
+#        SourcePort:
+#        -
+#        SourcePurpose: Elastalert
+#        SourceSubPurpose: default
+#        SourceVIP:
+#        SourceVLAN:
+#        -
+#      Tags:
+#      - ealert
+#      - slack
+#    CDNA_acl60:
+#      Comments: EMS to Staging purge/load
+#      Destination:
+#        DestinationEnvironment: EC
+#        DestinationHostname:
+#        DestinationNetworkGroup:
+#        DestinationPOP:
+#        -
+#        DestinationPOPGroup: Staging
+#        DestinationPort:
+#        - 8900
+#        - 22
+#        DestinationProtocol:
+#        - TCP
+#        DestinationPurpose:
+#        DestinationSubPurpose:
+#        DestinationVIP:
+#        DestinationVLAN:
+#        - PUBLIC
+#      Source:
+#        SourceEnvironment: EC
+#        SourceHostname:
+#        SourceNetworkGroup:
+#        SourcePOP:
+#        - EBO
+#        SourcePOPGroup: Back Office
+#        SourcePort:
+#        -
+#        SourcePurpose: Edge Messaging Service
+#        SourceSubPurpose: All
+#        SourceVIP:
+#        SourceVLAN:
+#        -
+#      Tags:
+#      - CDNA
+#      - purge
+#      - load
+#      - Staging
+    CDNA_acl61:
+      Comments: EMS EBO to Mongo Atlas
+      Destination:
+        DestinationEnvironment: EC
+        DestinationHostname: ems-cluster0-shard-00-00-e7eaa.mongodb.net
+        DestinationNetworkGroup:
+        DestinationPOP:
+        -
+        DestinationPOPGroup: Internet
+        DestinationPort:
+        - 27017
+        DestinationProtocol:
+        - TCP
+        DestinationPurpose:
+        DestinationSubPurpose:
+        DestinationVIP:
+        DestinationVLAN:
+        -
+      Source:
+        SourceEnvironment: EC
+        SourceHostname:
+        SourceNetworkGroup:
+        SourcePOP:
+        - EBO
+        SourcePOPGroup: Back Office
+        SourcePort:
+        -
+        SourcePurpose: Edge Messaging Service
+        SourceSubPurpose: All
+        SourceVIP:
+        SourceVLAN:
+        -
+      Tags:
+      - CDNA
+      - Mongo Atlas
+    CDNA_acl62:
+      Comments: EMS EBO to Mongo Atlas
+      Destination:
+        DestinationEnvironment: EC
+        DestinationHostname: ems-cluster0-shard-00-01-e7eaa.mongodb.net
+        DestinationNetworkGroup:
+        DestinationPOP:
+        -
+        DestinationPOPGroup: Internet
+        DestinationPort:
+        - 27017
+        DestinationProtocol:
+        - TCP
+        DestinationPurpose:
+        DestinationSubPurpose:
+        DestinationVIP:
+        DestinationVLAN:
+        -
+      Source:
+        SourceEnvironment: EC
+        SourceHostname:
+        SourceNetworkGroup:
+        SourcePOP:
+        - EBO
+        SourcePOPGroup: Back Office
+        SourcePort:
+        -
+        SourcePurpose: Edge Messaging Service
+        SourceSubPurpose: All
+        SourceVIP:
+        SourceVLAN:
+        -
+      Tags:
+      - CDNA
+      - Mongo Atlas
+    CDNA_acl63:
+      Comments: EMS EBO to Mongo Atlas
+      Destination:
+        DestinationEnvironment: EC
+        DestinationHostname: ems-cluster0-shard-00-02-e7eaa.mongodb.net
+        DestinationNetworkGroup:
+        DestinationPOP:
+        -
+        DestinationPOPGroup: Internet
+        DestinationPort:
+        - 27017
+        DestinationProtocol:
+        - TCP
+        DestinationPurpose:
+        DestinationSubPurpose:
+        DestinationVIP:
+        DestinationVLAN:
+        -
+      Source:
+        SourceEnvironment: EC
+        SourceHostname:
+        SourceNetworkGroup:
+        SourcePOP:
+        - EBO
+        SourcePOPGroup: Back Office
+        SourcePort:
+        -
+        SourcePurpose: Edge Messaging Service
+        SourceSubPurpose: All
+        SourceVIP:
+        SourceVLAN:
+        -
+      Tags:
+      - CDNA
+      - Mongo Atlas
   ApplicationOwner: cdna
