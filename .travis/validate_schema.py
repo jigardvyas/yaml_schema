@@ -87,18 +87,11 @@ for root, dirs, files in os.walk('./Yaml-Data'):
                 # checking schema
                 print("----> ACL Name is {0}".format(acl_name))
                 name_pattern = re.compile("^(\D+)(\d+)$")
-                print(name_pattern.match(acl_name))
+                #print(name_pattern.match(acl_name))
                 #print(acl(acl_data))
                 if name_pattern.match(acl_name) != None:
                     try:
-                        print("----> ACL Name is {0}".format(acl_name))
-                        name_pattern = re.compile("^(\D+)(\d+)$")
-                        print(name_pattern.match(acl_name))
-                        #print(acl(acl_data))
-                        if name_pattern.match(acl_name) != None:
-                            acl(acl_data)
-                        else:
-                            print("----> {0} ACL Name has Error and return None".format(acl_name))
+                        acl(acl_data)
                     except MultipleInvalid as err:
                         for each in err.errors:
                             invalid_value = ""
@@ -154,7 +147,7 @@ for root, dirs, files in os.walk('./Yaml-Data'):
                         else:
                             duplicate_check.append((acl_name, acl_data['Source'], acl_data['Destination']))
                 else:
-                     print("----> {0} ACL Name Rerurn None".format(acl_name))
+                     print("----> {0} ACL Name Return None".format(acl_name))
                      ret += 1
             # uberlint
             try:
