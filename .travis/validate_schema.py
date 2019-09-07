@@ -85,70 +85,65 @@ for root, dirs, files in os.walk('./Yaml-Data'):
             duplicate_check = []
             for acl_name, acl_data in yaml_content["ACL"].items():
                 # checking schema
-                print("----> ACL Name is {0}".format(acl_name))
-                name_pattern = re.compile("^(\D+)(\d+)$")
-                #print(name_pattern.match(acl_name))
-                #print(acl(acl_data))
-                if name_pattern.match(acl_name) != None:
-                    try:
-                        acl(acl_data)
-                    except MultipleInvalid as err:
-                        for each in err.errors:
-                            invalid_value = ""
-                            if len(each.path) == 2:
-                                invalid_value = acl_data[each.path[0]][each.path[1]]
-                            if len(each.path) == 3:
-                                invalid_value = acl_data[each.path[0]][each.path[1]][each.path[2]]
-                            print("===> ACL Name: {} - {} - {}".format(acl_name, each, invalid_value))
-                            ret += 1
-                    # warn duplicate ACL
-                    source_count = 0
-                    dest_count = 0
-                    for n, s, d in duplicate_check:
-                        if (s, d) == (acl_data['Source'], acl_data['Destination']):
-                            print("===> Possible duplicate acl {} and {}".format(acl_name, n))
-                            # only warning until fixed
-                            # ret += 1
-                        #check hostname for valid fqdn or ip
-                        if acl_data['Source']['SourceHostname']:
-                            source_count += 1
-                            import re
-                            pat = re.compile("^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$")
-                            host_digits = pat.findall(acl_data['Source']['SourceHostname'])
-                            if len(host_digits) > 0:
-                                if not socket.inet_aton(acl_data['Source']['SourceHostname']):
-                                    print("===> Invalid Source hostname ip in acl {} and {}".format(acl_name, n))
-                                    ret += 1
-                            else:
-                                host_string = str(acl_data['Source']['SourceHostname']).find('/')
-                                if host_string > 0:
-                                    ret += 1
-                                    print("===> Invalid Source hostname fqdn in acl {} and {}".format(acl_name, n))
-                            if source_count >= 1024:
-                                print("===> To Many Source, {0} or Destination {1} Hostnames: ".format(source_count, dest_count))
-                                raise Exception("To Many Source, {0},  Hostnames ".format(source_count))
-                        elif acl_data['Destination']['DestinationHostname']:
-                            dest_count += 1
-                            import re
-                            pat = re.compile("^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$")
-                            host_digits = pat.findall(acl_data['Destination']['DestinationHostname'])
-                            if len(host_digits) > 0:
-                                if not socket.inet_aton(acl_data['Destination']['DestinationHostname']):
-                                    print("===> Invalid Destination hostname ip in acl {} and {}".format(acl_name, n))
-                                    ret += 1
-                            else:
-                                host_string = str(acl_data['Destination']['DestinationHostname']).find('/')
-                                if host_string > 0:
-                                    ret += 1
-                                    print("===> Invalid Destination hostname fqdn in acl {} and {}".format(acl_name, n))
-                            if dest_count >= 1024:
-                                print("===> To Many Destination {0} Hostnames ".format(dest_count))
-                                raise Exception("To Many Source, {0},  Hostnames ".format(dest_count))
+                try:
+                    acl(acl_data)
+                except MultipleInvalid as err:
+                    for each in err.errors:
+                        invalid_value = ""
+                        if len(each.path) == 2:
+                            invalid_value = acl_data[each.path[0]][each.path[1]]
+                        if len(each.path) == 3:
+                            invalid_value = acl_data[each.path[0]][each.path[1]][each.path[2]]
+                        print("===> ACL Name: {} - {} - {}".format(acl_name, each, invalid_value))
+                        ret += 1
+
+                # warn duplicate ACL
+                source_count = 0
+                dest_count = 0
+                for n, s, d in duplicate_check:
+                    if (s, d) == (acl_data['Source'], acl_data['Destination']):
+                        print("===> Possible duplicate acl {} and {}".format(acl_name, n))
+                        # only warning until fixed
+                        # ret += 1
+                    #check hostname for valid fqdn or ip
+
+                    if acl_data['Source']['SourceHostname']:
+                        source_count += 1
+                        import re
+                        pat = re.compile("^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$")
+                        host_digits = pat.findall(acl_data['Source']['SourceHostname'])
+                        if len(host_digits) > 0:
+                            if not socket.inet_aton(acl_data['Source']['SourceHostname']):
+                                print("===> Invalid Source hostname ip in acl {} and {}".format(acl_name, n))
+                                ret += 1
                         else:
-                            duplicate_check.append((acl_name, acl_data['Source'], acl_data['Destination']))
+                            host_string = str(acl_data['Source']['SourceHostname']).find('/')
+                            if host_string > 0:
+                                ret += 1
+                                print("===> Invalid Source hostname fqdn in acl {} and {}".format(acl_name, n))
+                        if source_count >= 1024:
+                            print("===> To Many Source, {0} or Destination {1} Hostnames: ".format(source_count, dest_count))
+                            raise Exception("To Many Source, {0},  Hostnames ".format(source_count))
+                    elif acl_data['Destination']['DestinationHostname']:
+                        dest_count += 1
+                        import re
+                        pat = re.compile("^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$")
+
+                        host_digits = pat.findall(acl_data['Destination']['DestinationHostname'])
+                        if len(host_digits) > 0:
+                            if not socket.inet_aton(acl_data['Destination']['DestinationHostname']):
+                                print("===> Invalid Destination hostname ip in acl {} and {}".format(acl_name, n))
+                                ret += 1
+                        else:
+                            host_string = str(acl_data['Destination']['DestinationHostname']).find('/')
+                            if host_string > 0:
+                                ret += 1
+                                print("===> Invalid Destination hostname fqdn in acl {} and {}".format(acl_name, n))
+                        if dest_count >= 1024:
+                            print("===> To Many Destination {0} Hostnames ".format(dest_count))
+                            raise Exception("To Many Source, {0},  Hostnames ".format(dest_count))
                 else:
-                     print("----> {0} ACL Name Return None".format(acl_name))
-                     ret += 1
+                    duplicate_check.append((acl_name, acl_data['Source'], acl_data['Destination']))
             # uberlint
             try:
                 # TODO: SSL Verification
