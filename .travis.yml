@@ -1,0 +1,10 @@
+dist: trusty
+language: python
+python:
+  - "3.5"
+install:
+  - pip install -r makefile_requirements.txt
+# command to run tests
+script: 
+  - export CHANGED_FILES=$(git diff --name-only $TRAVIS_COMMIT_RANGE)
+  - make
