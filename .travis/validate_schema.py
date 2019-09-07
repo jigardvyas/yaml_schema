@@ -87,13 +87,6 @@ for root, dirs, files in os.walk('./Yaml-Data'):
                 # checking schema
                 try:
                     print("----> ACL Name is {0}".format(acl_name))
-                    a_name = re.compile("^(\D+)(\d+)$")
-                    acl_name = a_name.findall(acl_name)
-                except Exception as err:
-                    print("{0} ACL Name is not Good".format(acl_name))
-                    print(err)
-                try:
-                    print("----> ACL Name is {0}".format(acl_name))
                     #print(acl(acl_data))
                     acl(acl_data)
                 except MultipleInvalid as err:
