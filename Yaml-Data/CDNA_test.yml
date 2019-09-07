@@ -70,4 +70,39 @@ EBO:
         - EBO_CDNA
       Tags:
       - Java Download
+    CDNA888_acl6:
+      Comments: EBO to Oracle Java
+      Destination:
+        DestinationEnvironment: EC
+        DestinationHostname: download.oracle.com
+        DestinationNetworkGroup:
+        DestinationPOP:
+        -
+        DestinationPOPGroup: Internet
+        DestinationPort:
+        - 80
+        DestinationProtocol:
+        - TCP
+        DestinationPurpose:
+        DestinationSubPurpose:
+        DestinationVIP:
+        DestinationVLAN:
+        -
+      Source:
+        SourceEnvironment: EC
+        SourceHostname:
+        SourceNetworkGroup:
+        SourcePOP:
+        - EBO
+        SourcePOPGroup: Back Office
+        SourcePort:
+        -
+        SourcePurpose:
+        SourceSubPurpose:
+        SourceVIP:
+        SourceVLAN:
+        - EBO_CDNA_SLW
+        - EBO_CDNA
+      Tags:
+      - Java Download
   ApplicationOwner: cdna
