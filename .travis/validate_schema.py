@@ -51,7 +51,7 @@ acl = Schema({
 
 ret = 0
 changed_files = os.environ['CHANGED_FILES']
-print(changed_files)
+print("{0} file Modified ".format(changed_files))
 
 for root, dirs, files in os.walk('./Yaml-Data'):
     for filename in files:
@@ -87,7 +87,7 @@ for root, dirs, files in os.walk('./Yaml-Data'):
                 # checking schema
                 try:
                     acl(acl_data)
-                    print(cl(acl_data))
+                    print(acl(acl_data))
                 except MultipleInvalid as err:
                     for each in err.errors:
                         invalid_value = ""
