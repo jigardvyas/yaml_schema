@@ -86,8 +86,9 @@ for root, dirs, files in os.walk('./Yaml-Data'):
             for acl_name, acl_data in yaml_content["ACL"].items():
                 # checking schema
                 try:
-                    acl(acl_data)
+                    print("----> ACL Name is {0}".format(acl_name))
                     print(acl(acl_data))
+                    acl(acl_data)
                 except MultipleInvalid as err:
                     for each in err.errors:
                         invalid_value = ""
