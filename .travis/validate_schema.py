@@ -42,12 +42,12 @@ source = {
     Required('SourceHostname'): Any(None, str)
 }
 
-acl = Schema({Required(r"^(\D+)(\d+)$"):{
+acl = Schema({
     Required('Comments'): Any(None, str),
     Required('Destination'): destination,
     Required('Source'): source,
     Required('Tags'): list
-}})
+})
 
 ret = 0
 changed_files = os.environ['CHANGED_FILES']
