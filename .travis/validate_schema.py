@@ -87,8 +87,8 @@ for root, dirs, files in os.walk('./Yaml-Data'):
                 #print("----> ACL Name is {0}".format(acl_name))
                 name_pattern = re.compile("^(\D+)(\d+)$")
                 if name_pattern.match(acl_name) != None:
-                    print("ACL Name is {0}".format(acl_name))
-                    pass
+                    #print("ACL Name is {0}".format(acl_name))
+                    continue
                 else:
                     print("----> {0} ACL Name Return None".format(acl_name))
                     ret += 1
