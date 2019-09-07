@@ -67,14 +67,16 @@ for root, dirs, files in os.walk('./Yaml-Data'):
             try:
                 #yaml_content = yaml.load(open(yamlfile))
                 yaml_content = yaml.safe_load(open(yamlfile))
+                print(yaml_content)
             except Exception as err:
                 ret += 1
-                print("===> fail at yaml file loading")
+                print("===> {0} fail at yaml file loading".format(yamlfile))
                 print(err)
                 continue
 
             print("===> " + filename)
             yaml_content = yaml_content.get('EBO', yaml_content.get('EBY', None))
+            print(yaml_content)
             if not isinstance(yaml_content, dict):
                 ret += 1
                 print("===> fail at yaml file loading")
@@ -85,6 +87,7 @@ for root, dirs, files in os.walk('./Yaml-Data'):
                 # checking schema
                 try:
                     acl(acl_data)
+                    print(cl(acl_data))
                 except MultipleInvalid as err:
                     for each in err.errors:
                         invalid_value = ""
