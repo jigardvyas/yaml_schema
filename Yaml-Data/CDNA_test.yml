@@ -70,22 +70,23 @@ EBO:
         - EBO_CDNA
       Tags:
       - Java Download
-    CDNA888_acl6:
-      Comments: EBO to Oracle Java
+    IA_acl11:
+      Comments: EBY Livestore Access for monitor.edgecast.com
       Destination:
-        DestinationEnvironment: EC
-        DestinationHostname: download.oracle.com
+        DestinationEnvironment: IR500
+        DestinationHostname:
         DestinationNetworkGroup:
         DestinationPOP:
         -
-        DestinationPOPGroup: Internet
+        DestinationPOPGroup: Back Office
         DestinationPort:
+        - 443
         - 80
         DestinationProtocol:
         - TCP
         DestinationPurpose:
         DestinationSubPurpose:
-        DestinationVIP:
+        DestinationVIP: 6707
         DestinationVLAN:
         -
       Source:
@@ -96,13 +97,15 @@ EBO:
         - EBO
         SourcePOPGroup: Back Office
         SourcePort:
-        -
-        SourcePurpose:
-        SourceSubPurpose:
+        - 443
+        - 80
+        SourcePurpose: Monitor Server
+        SourceSubPurpose: ecnweb
         SourceVIP:
         SourceVLAN:
-        - EBO_CDNA_SLW
-        - EBO_CDNA
+        -
       Tags:
-      - Java Download
+      - ecnweb
+      - monitor
+      - dashboard
   ApplicationOwner: cdna

@@ -59,7 +59,7 @@ for root, dirs, files in os.walk('./Yaml-Data'):
                 not filename.startswith('.') and \
                 filename != 'mkdocs.yml':
             if filename not in changed_files:
-                print("Skpping unmodified file: {}".format(filename))
+                print("Skpping unmodified file: {0}".format(filename))
                 continue
             yamlfile = os.path.join(root, filename)
             yaml_content = None
