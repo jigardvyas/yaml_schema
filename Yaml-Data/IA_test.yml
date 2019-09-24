@@ -111,7 +111,7 @@ EBO:
         - ce
         - jenkins
         - ebo
-    ce_jenkins_k9_to_ebo_acl005: 
+    ce_jenkins_k9_to_ebo_acl004: 
       Comments: "ACL to allow CE Jenkins to access EBO API"
       Destination: 
         DestinationEnvironment: EC
